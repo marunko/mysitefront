@@ -9,7 +9,7 @@ export default function Footer(){
     async function fetchContact() {
       try {
          
-        const response = await fetch(`http://127.0.0.1:8000/contacts/`,{
+        const response = await fetch(`http://127.0.0.1:8000/api/contacts/`,{
             method: "POST",
             headers: {
             "Content-Type": "application/json",

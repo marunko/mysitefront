@@ -10,7 +10,7 @@ export default function HireMe() {
   useEffect(() => {
     async function fetchContact() {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/contacts/` , {
+        const res = await fetch(`http://127.0.0.1:8000/api/contacts/` , {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
