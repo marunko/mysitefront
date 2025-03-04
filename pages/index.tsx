@@ -53,7 +53,9 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
   // Fetch data from your API or database
   const cookies = new Cookies(req, res);
   const token = cookies.get('token') || null;
-  let response = await fetch(`${process.env.BACKEND_URL}/about-me-key/`, {
+  console.log("Index page " + process.env.NEXT_PUBLIC_BACKEND_URL);
+ 
+  let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/about-me-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
   }
   const aboutMe = await response.json();
   // Fetch skills data from the API
-  response = await fetch(`${process.env.BACKEND_URL}/skills-key/`, {
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/skills-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -90,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
       text: tag.text,
     })),
   }));
-  response = await fetch(`${process.env.BACKEND_URL}/experience-key/`,{
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/experience-key/`,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -106,7 +108,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
     start_date: item.start_date,
     end_date: item.end_date,
   }));
-  response = await fetch(`${process.env.BACKEND_URL}/certifications-key/`, {
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/certifications-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -120,14 +122,14 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
     };
   }
   const certdata: Certification[] = await response.json();
-  console.log(certdata.length);
+ 
   const certifications: Certification[] = certdata.map((item) => ({
     title: item.title,
     text: item.text,
     image_path: item.image_path,
     link: item.link,
   }));;
-  response = await fetch(`${process.env.BACKEND_URL}/projects-key/`, {
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -148,6 +150,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
   const projects: Project[] = projdata.map((item) => ({
     title: item.title,
     description: item.description,
+    summary: item.summary,
     image_path: "https://picsum.photos/200/300/?blur=2",
     link: item.link,
   }));

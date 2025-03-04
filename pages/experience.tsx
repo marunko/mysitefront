@@ -23,7 +23,7 @@ interface ExperienceTableProps {
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
   const cookies = new Cookies(req, res);
   const token = cookies.get('token') || null;
-  const res1 = await fetch(`${process.env.BACKEND_URL}/experience-key/`,{
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/experience-key/`,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

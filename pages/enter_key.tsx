@@ -18,7 +18,7 @@ const EnterKeyPage = () => {
     }
 // backend check
 console.log("checking backend");
-     const res = await fetch(`http://localhost:8000/check-token/`, {//validate key server
+     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/`, {//validate key server
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

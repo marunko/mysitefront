@@ -10,7 +10,7 @@ export default function HireMe() {
   useEffect(() => {
     async function fetchContact() {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/contacts/` , {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contacts/` , {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export default function HireMe() {
     fetchContact();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     window.location.href = `mailto:marunkopavlo@gmail.com?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(message)}`;
   };

@@ -14,12 +14,12 @@ interface ProjectPageProps {
   projects: Project[];
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   // Extract token from cookies
-  const cookies = new Cookies(req);
+  const cookies = new Cookies(req, res);
   const token = cookies.get('token') || null;
   // Fetch certifications data from the API
-  const res = await fetch(`${process.env.BACKEND_URL}/projects-key/`, {
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,13 +28,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     body: JSON.stringify({ "token": token }),
   });
 
-  if (!res.ok) {
+  if (!res1.ok) {
     return {
       notFound: true,
     };
   }
 
-  const data: Project[] = await res.json();
+  const data: Project[] = await res1.json();
 
   // Process data to exclude `id` and `tag`
   const processedData: Project[] = data.map((item) => ({

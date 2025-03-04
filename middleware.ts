@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   if (
     pathname.startsWith('/_next') || // Static assets
     pathname.startsWith('/favicon.ico') || // Favicon
-    pathname.startsWith(`${process.env.BACKEND_URL}`) || 
+    pathname.startsWith(`${process.env.NEXT_PUBLIC_BACKEND_URL}`) || 
    // pathname.startsWith(`${process.env.FRONT_END}/api/save-key`) || 
     excludedPaths.some((path) =>
       typeof path === 'string'
@@ -47,7 +47,7 @@ export async function middleware(req: NextRequest) {
    return response;
  }
 
- console.log("end of middleware + env "+process.env.BACKEND_URL);
+ console.log("end of middleware + env "+process.env.NEXT_PUBLIC_BACKEND_URL);
   // Allow the request to continue
   return NextResponse.next();
 }
@@ -55,7 +55,7 @@ export async function middleware(req: NextRequest) {
 // Mocked function to validate the token on the server
 async function validateToken(token: string): Promise<boolean> {
   // Example API call (replace with actual validation logic)
-  const res = await fetch(`${process.env.BACKEND_URL}/check-token/`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

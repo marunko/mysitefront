@@ -6,7 +6,7 @@ interface AboutData{
 export const getServerSideProps: GetServerSideProps = async (context) => {
 const token = context.req.cookies?.token || "";
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/about-me-key/` , {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/about-me-key/` , {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

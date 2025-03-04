@@ -13,8 +13,11 @@ interface CertificatesProps {
   certifications: Certification[];
 }
 
-const CustomPrevArrow = (props) => {
-  const { onClick } = props;
+interface ArrowProps {
+  onClick: () => void;
+}
+
+const CustomPrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -25,8 +28,7 @@ const CustomPrevArrow = (props) => {
   );
 };
 
-const CustomNextArrow = (props) => {
-  const { onClick } = props;
+const CustomNextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -37,15 +39,15 @@ const CustomNextArrow = (props) => {
   );
 };
 
-export default function Certificates({ certifications }: CertificatesProps) {
+const Certificates: React.FC<CertificatesProps> = ({ certifications }) => {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow onClick={() => {}} />,  // Dummy onClick function to resolve the error
+    nextArrow: <CustomNextArrow onClick={() => {}} />,  // Dummy onClick function to resolve the error
     arrows: true, // Ensure arrows are enabled
   };
 
@@ -53,8 +55,9 @@ export default function Certificates({ certifications }: CertificatesProps) {
     <section className="p-8">
       {/* Section Header */}
       <h3 className="text-3xl font-semibold flex items-center ">
-          <span className="flex-grow border-t border-gray-500 mr-4"></span>
-          Certificates<span className="flex-grow border-t border-gray-500 ml-4"></span>
+        <span className="flex-grow border-t border-gray-500 mr-4"></span>
+        Certificates
+        <span className="flex-grow border-t border-gray-500 ml-4"></span>
       </h3>
 
       {/* Slider */}
@@ -85,4 +88,6 @@ export default function Certificates({ certifications }: CertificatesProps) {
       </Slider>
     </section>
   );
-}
+};
+
+export default Certificates;

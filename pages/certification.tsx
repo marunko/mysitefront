@@ -9,12 +9,12 @@ interface CertificationPageProps {
   certifications: Certification[];
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   // Extract token from cookies
-  const cookies = new Cookies(req);
+  const cookies = new Cookies(req, res);
   const token = cookies.get('token') || null;
   // Fetch certifications data from the API
-  const res = await fetch(`${process.env.BACKEND_URL}/certifications-key/`, {
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/certifications-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,13 +23,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     body: JSON.stringify({ "token": token }),
   });
 
-  if (!res.ok) {
+  if (!res1.ok) {
     return {
       notFound: true,
     };
   }
 
-  const data: Certification[] = await res.json();
+  const data: Certification[] = await res1.json();
 
   // Process data to exclude `id` and `tag`
   const processedData: Certification[] = data.map((item) => ({

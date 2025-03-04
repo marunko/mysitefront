@@ -16,13 +16,13 @@ interface SkillsPageProps {
   skills: Skill[];
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   // Extract token from cookies
-  const cookies = new Cookies(req);
+  const cookies = new Cookies(req, res);
   const token = cookies.get('token') || null;
 
   // Fetch skills data from the API
-  const res = await fetch(`${process.env.BACKEND_URL}/skills-key/`, {
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/skills-key/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,13 +31,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     body: JSON.stringify({ "token": token }),
   });
 
-  if (!res.ok) {
+  if (!res1.ok) {
     return {
       notFound: true,
     };
   }
 
-  const data: Skill[] = await res.json();
+  const data: Skill[] = await res1.json();
 
   // Process data to exclude `id` and `tag`
   const processedData: Skill[] = data.map((item) => ({

@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   console.log("PARAMS")
   let token = param;
   // Validate the param on the server
-  const backendUrl = process.env.BACKEND_URL; // Load backend URL from .env
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL; // Load backend URL from .env
   console.log(backendUrl);
   const validateResponse = await fetch(`${backendUrl}/check-token/`, {
     method: 'POST',
