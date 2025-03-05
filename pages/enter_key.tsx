@@ -17,7 +17,7 @@ const EnterKeyPage = () => {
       return;
     }
 // backend check
-console.log("checking backend");
+console.log("checking backend from enter_key on link  " + process.env.NEXT_PUBLIC_BACKEND_URL);
      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/`, {//validate key server
       method: 'POST',
       headers: {
