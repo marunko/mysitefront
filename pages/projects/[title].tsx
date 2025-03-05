@@ -37,7 +37,7 @@ export default function ProjectDetail({ project }: { project: any }) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { title } = context.params as { title: string };
   const token = context.req.cookies?.token || "";
-  console.log(`${process.env.BACKEND_URL}/projects-key/${title}/`);
+  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/${title}/`);
   if (!token) {
     return {
       redirect: {
@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/projects-key/${title}/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/${title}/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

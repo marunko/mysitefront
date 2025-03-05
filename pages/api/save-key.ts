@@ -16,12 +16,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     // Set cookie options directly
     cookies.set('token', key, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',  // Secure cookies in production
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      sameSite: 'none', // Allow cross-origin cookies in production
-      path: '/', // Cookie applies to entire domain
+      sameSite: 'lax',
     });
-
+    console.log("SETTED COOKIES " + key);
+    console.log(process.env.NODE_ENV);
     return res.status(200).json({ message: 'Key saved successfully' });
   }
 
