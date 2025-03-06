@@ -33,6 +33,7 @@ const EnterKeyPage = () => {
       Cookies.set('token', key, {
         secure: process.env.NODE_ENV === 'test',
         expires:30,
+        sameSite: 'lax',
        });  // Set cookie with an expiration of 7 days
 
       // Redirect after saving cookie
@@ -50,6 +51,7 @@ const EnterKeyPage = () => {
           <label className="text-sm text-gray-600">
             Your token is shown at the end of the shared link: 
             <span className="font-mono text-blue-500"> /log/[token_key]</span>
+            <p>{process.env.NEXT_PUBLIC_BACKEND_URL}</p>
           </label>
           <input
             type="text"
