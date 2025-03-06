@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     // Set cookie options directly
     cookies.set('token', key, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === 'test',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       sameSite: 'lax',
     });

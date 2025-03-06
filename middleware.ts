@@ -55,12 +55,12 @@ export async function middleware(req: NextRequest) {
 // Mocked function to validate the token on the server
 async function validateToken(token: string): Promise<boolean> {
   // Example API call (replace with actual validation logic)
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/`, {
-    method: 'POST',
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/?token=${encodeURIComponent(token)}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({"token": token }),
+ 
   });
 
   if (res.ok) {

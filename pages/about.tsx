@@ -6,13 +6,13 @@ interface AboutData{
 export const getServerSideProps: GetServerSideProps = async (context) => {
 const token = context.req.cookies?.token || "";
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/about-me-key/` , {
-        method: "POST",
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/about-me-key/?token=${encodeURIComponent(token)}` , {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           
         },
-        body: JSON.stringify({ "token": token }),
+ 
       });
     if (!res.ok) {
       throw new Error("Failed to fetch data");

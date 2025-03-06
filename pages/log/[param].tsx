@@ -4,7 +4,7 @@ import Cookies from 'cookies';
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const { req, res } = context;
   const { param } = context.params as { param: string };
-  console.log("PARAMS1")
+ 
   // reset cookies if they existed 
   const cookies = new Cookies(req, res);
   cookies.set('token'); // Remove the token cookie
@@ -17,17 +17,17 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
       },
     };
   }
-  console.log("PARAMS")
+
   let token = param;
   // Validate the param on the server
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL; // Load backend URL from .env
   console.log(backendUrl);
-  const validateResponse = await fetch(`${backendUrl}/check-token/`, {
-    method: 'POST',
+  const validateResponse = await fetch(`${backendUrl}/check-token/?token=${encodeURIComponent(token)}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({"token": token }),
+ 
   });
 
   const isValid = (await validateResponse.json()).access;
@@ -38,8 +38,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     console.log("creating cookies");
     const cookies = new Cookies(req, res);
     cookies.set('token', param, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+ 
+      secure: process.env.NODE_ENV === 'test',
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       sameSite: 'lax',
     });

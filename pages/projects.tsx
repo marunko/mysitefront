@@ -14,18 +14,17 @@ interface ProjectPageProps {
   projects: Project[];
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // Extract token from cookies
-  const cookies = new Cookies(req, res);
-  const token = cookies.get('token') || null;
+  const token = context.req.cookies?.token || "";
   // Fetch certifications data from the API
-  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/`, {
-    method: "POST",
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/?token=${encodeURIComponent(token)}`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
 
   if (!res1.ok) {

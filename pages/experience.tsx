@@ -20,15 +20,14 @@ interface ExperienceTableProps {
   experiences: Experience[];
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-  const cookies = new Cookies(req, res);
-  const token = cookies.get('token') || null;
-  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/experience-key/`,{
-    method: 'POST',
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const token = context.req.cookies?.token || "";
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/experience-key/?token=${encodeURIComponent(token)}`,{
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
   const data: Experience[] = await res1.json();
 

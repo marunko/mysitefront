@@ -49,18 +49,17 @@ export default function Home({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
+export const getServerSideProps: GetServerSideProps = async (context) =>{
   // Fetch data from your API or database
-  const cookies = new Cookies(req, res);
-  const token = cookies.get('token') || null;
+  const token = context.req.cookies?.token || "";
   console.log("Index page " + process.env.NEXT_PUBLIC_BACKEND_URL);
- 
-  let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/about-me-key/`, {
-    method: "POST",
+  
+  let response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/about-me-key/?token=${encodeURIComponent(token)}`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
 
   if (!response.ok) {
@@ -70,12 +69,12 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
   }
   const aboutMe = await response.json();
   // Fetch skills data from the API
-  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/skills-key/`, {
-    method: "POST",
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/skills-key/?token=${encodeURIComponent(token)}`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
 
   if (!response.ok) {
@@ -92,12 +91,12 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
       text: tag.text,
     })),
   }));
-  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/experience-key/`,{
-    method: 'POST',
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/experience-key/?token=${encodeURIComponent(token)}`,{
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
   let data: Experience[] = await response.json();
 
@@ -108,13 +107,13 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
     start_date: item.start_date,
     end_date: item.end_date,
   }));
-  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/certifications-key/`, {
-    method: "POST",
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/certifications-key/?token=${encodeURIComponent(token)}`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
   if (!response.ok) {
     return {
@@ -129,13 +128,13 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) =>{
     image_path: item.image_path,
     link: item.link,
   }));;
-  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/`, {
-    method: "POST",
+  response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/projects-key/?token=${encodeURIComponent(token)}`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       
     },
-    body: JSON.stringify({ "token": token }),
+ 
   });
 
   if (!response.ok) {

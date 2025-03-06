@@ -10,7 +10,7 @@ export default function Footer(){
       try {
          
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contacts/`,{
-            method: "POST",
+            method: "GET",
             headers: {
             "Content-Type": "application/json",
             },
