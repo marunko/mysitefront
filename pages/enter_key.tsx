@@ -25,7 +25,9 @@ const EnterKeyPage = () => {
       }
        
     });
-
+    if (!res.ok) {
+      throw new Error("Failed to fetch contact data");
+    }
     const responseData = await res.json();
     if (responseData?.access) {
       // Save the key to cookies
