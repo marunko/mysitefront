@@ -9,7 +9,7 @@ export default function Footer(){
     async function fetchContact() {
       try {
         const csrfToken = Cookies.get('csrftoken') || ''; // Ensure it's always a string
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contacts/`,{
+        const response = await fetch(`/api/contacts/`,{
             method: "GET",
             headers: {
             "Content-Type": "application/json",

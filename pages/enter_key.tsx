@@ -18,7 +18,7 @@ const EnterKeyPage = () => {
     const csrfToken = Cookies.get('csrftoken') || '';
     // Backend check
     console.log("Checking backend from enter_key on link " + process.env.NEXT_PUBLIC_BACKEND_URL);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/?token=${encodeURIComponent(key)}`, {
+    const res = await fetch(`/api/check-token/?token=${encodeURIComponent(key)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
