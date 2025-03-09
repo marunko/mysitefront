@@ -15,6 +15,7 @@ export default function Footer(){
             "Content-Type": "application/json",
             'X-CSRFToken': csrfToken,  // Add the CSRF token from cookies
             },
+            credentials: "include",  // 🔹 Important for CSRF cookies
             
         });
         if (!response.ok) {

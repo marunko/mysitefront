@@ -23,7 +23,8 @@ const EnterKeyPage = () => {
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': csrfToken, 
-      }
+      },
+      credentials: "include",  // 🔹 Important for CSRF cookies
        
     });
     if (!res.ok) {
