@@ -15,13 +15,14 @@ const EnterKeyPage = () => {
       setError('Please enter a key.');
       return;
     }
-
+    const csrfToken = Cookies.get('csrftoken') || '';
     // Backend check
     console.log("Checking backend from enter_key on link " + process.env.NEXT_PUBLIC_BACKEND_URL);
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/check-token/?token=${encodeURIComponent(key)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken, 
       }
        
     });
@@ -43,6 +44,7 @@ const EnterKeyPage = () => {
     } else {
       setError('Token has expired or is invalid');
     }
+    console.log("End of enter key");
   };
 
   return (
