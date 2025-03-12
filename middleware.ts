@@ -9,7 +9,11 @@ export async function middleware(req: NextRequest) {
    `${process.env.BACKEND_URL}/check-token/`
   ]; // Paths to exclude
   const pathname = req.nextUrl.pathname;
+  // Get the IP address from headers (supports multiple proxies)
+  const forwarded = req.headers.get("x-forwarded-for");
+  const ip = forwarded ? forwarded.split(",")[0].trim() : "Unknown";
 
+  console.log("Sender IP:", ip);
   // Exclude static assets and excluded paths
   if (
     pathname.startsWith('/_next') || // Static assets

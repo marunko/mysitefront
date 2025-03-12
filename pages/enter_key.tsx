@@ -41,7 +41,7 @@ const EnterKeyPage = () => {
        });  // Set cookie with an expiration of 7 days
 
       // Redirect after saving cookie
-      router.push('/show_token');
+      router.push('/');
     } else {
       setError('Token has expired or is invalid');
     }
