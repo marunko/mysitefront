@@ -15,7 +15,7 @@ export default function Skills ({ skills }: SkillsProps) {
               <h3 className="text-xl font-semibold mb-2">{skill.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {skill.skill_tags.map((subTag, i) => (
-                  <span key={i} className="bg-blue-400 dark:bg-blue-500 px-3 py-1 rounded-full text-sm dark:text-white dark:text-gray-800">
+                  <span key={i} className="bg-blue-400 text-white dark:bg-gray-100 px-3 py-1 rounded-full text-sm dark:text-gray-900">
                     {subTag.text}
                   </span>
                 ))}
