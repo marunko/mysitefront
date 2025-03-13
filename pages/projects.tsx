@@ -58,7 +58,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ projects }) => {
         {projects.map((proj, index) => (
           <a
             key={index}
-            href={proj.link}
+            href={`/projects/${encodeURIComponent(proj.title)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="relative rounded-lg overflow-hidden shadow-lg group hover:scale-105 transition-transform duration-300"
