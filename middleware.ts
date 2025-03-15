@@ -39,7 +39,7 @@ export async function middleware(req: NextRequest) {
  const token = req.cookies.get('token')?.value;
  
  // Validate the token
- const isValid = token && token.length > 1 ? await validateToken(token) : false;
+ const isValid = token && token.length == 14 ? await validateToken(token) : false;
 
  // If no token or invalid token, delete the cookie and redirect to /enter_key
  console.log("token checking... "+isValid);

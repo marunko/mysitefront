@@ -10,6 +10,7 @@ export default function Footer(){
       try {
         const csrfToken = Cookies.get('csrftoken') || ''; // Ensure it's always a string
         const response = await fetch(`/api/contacts/`,{
+          // change on server as /api/ (nginx routing)
             method: "GET",
             headers: {
             "Content-Type": "application/json",

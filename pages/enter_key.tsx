@@ -28,7 +28,8 @@ const EnterKeyPage = () => {
        
     });
     if (!res.ok) {
-      throw new Error("Failed to fetch contact data");
+      setError('Token has expired or is invalid');
+      return;
     }
     const responseData = await res.json();
     if (responseData?.access) {
@@ -86,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     console.log(token + " - TOKEN EXISTS");
     return {
       redirect: {
-        destination: '/show_token',
+        destination: '/',
         permanent: false,
       },
     };

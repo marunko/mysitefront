@@ -19,7 +19,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/">
               <span className="text-xl font-bold cursor-pointer">
-                Portfolio Logo
+                Portfolio
               </span>
             </Link>
           </div>
