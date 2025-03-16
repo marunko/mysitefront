@@ -2,6 +2,11 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+function formatText(text: string) {
+  return text
+    .replace(/\n/g, "<br>")
+    .replace(/\t/g, "&emsp;");
+}
 export default function ProjectDetail({ project }: { project: any }) {
   if (!project) {
     return <div className="text-center text-red-500">Project not found.</div>;
@@ -20,7 +25,7 @@ export default function ProjectDetail({ project }: { project: any }) {
         <h1 className="text-3xl font-bold mt-6">{project.title}</h1>
 
         {/* Project Description */}
-        <p className="text-gray-600 dark:text-gray-400 mt-4">{project.description}</p>
+        <p className="text-gray-600 dark:text-gray-400 mt-4" dangerouslySetInnerHTML={{ __html: formatText(project.description || "") }}/>
 
         {/* External Link */}
         <div className="mt-6">
