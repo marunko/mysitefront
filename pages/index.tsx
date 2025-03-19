@@ -150,7 +150,7 @@ export const getServerSideProps: GetServerSideProps = async (context) =>{
     title: item.title,
     description: item.description,
     summary: item.summary,
-    image_path: "https://picsum.photos/200/300/?blur=2",
+    image_path: item.image_path,
     link: item.link,
   }));
  
