@@ -46,6 +46,11 @@ const Navbar = () => {
                 Certification
               </span>
             </Link>
+            <Link href="/projects">
+              <span className=" hover:text-gray-500 hover:underline cursor-pointer">
+                Projects
+              </span>
+            </Link>
             <Link href="/contacts">
               <span className="bg-blue-600 text-white dark:bg-gray-100 dark:text-black px-4 py-2 rounded-md hover:bg-blue-700 hover:dark:bg-gray-300 cursor-pointer">
                 Contact Me

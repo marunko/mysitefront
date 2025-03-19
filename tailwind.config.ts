@@ -13,6 +13,7 @@ export default {
         background: 'var(--background)', // Use CSS variable for background
         foreground: 'var(--foreground)', // Use CSS variable for foreground
         secondback: 'var(--secondback)',
+        //background-start: 'var(--background-start)',
       },
       fontFamily: {
         sans: ['Arial', 'Helvetica', 'sans-serif'], // Add your custom font family

@@ -6,6 +6,9 @@
   --background: #ffffff;
   --foreground: #161624;
   --secondback: #f3f4f6;
+  --background-start: #ffffff; /* Indigo-600 */
+  --background-middle: #efebf2; /* Purple-600 */
+  --background-end: #f1efef; /* Pink-500 */
 }
 
 .dark {
@@ -14,6 +17,10 @@
     --foreground: #ededed;
 
     --secondback: #1f2937;
+    --background-start: #161624;
+    --background-middle: #202440;
+    --background-end: #1a1a2e; /* Darker shades */
+
 }
 
 body {
@@ -27,7 +34,7 @@ html, body {
 }
 .secondcolor{
   color: var(--foreground);
-  background: var(--secondback);
+  background: linear-gradient(to top, var(--background-start), var(--background-end));
 }
 .frontcolor{
   color: var(--foreground);

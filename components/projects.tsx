@@ -7,7 +7,7 @@ import Link from "next/link";
 
   export default function Projects({ projects }: ProjectsProps) {
     return (
-      <section className="p-8 secondcolor">
+      <section className="p-8 dark:bg-gradient-to-b from-[#1a1a2e] to-[#161624] ">
         {/* Section Header */}
         <h3 className="text-3xl font-semibold flex items-center mb-5">
           <span className="flex-grow border-t border-gray-500 mr-4"></span>
@@ -17,7 +17,7 @@ import Link from "next/link";
   
         {/* Responsive Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
-          {projects.map((project, index) => (
+          {projects.slice(0, 3).map((project, index) => (
             <Link key={index} href={`/projects/${encodeURIComponent(project.title)}`}>
               <div className="block rounded-lg overflow-hidden frontcolor shadow-lg transition-transform hover:scale-105">
                 {/* Project Image */}

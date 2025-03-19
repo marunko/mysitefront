@@ -4,7 +4,7 @@ interface SkillsProps {
   }
 export default function Skills ({ skills }: SkillsProps) {
     return (
-      <section className="p-8 ">
+      <section className="p-8 dark:bg-gradient-to-b from-[#161624] to-[#1a1a2e] ">
          <h3 className="text-3xl font-semibold flex items-center mb-5">
           <span className="flex-grow border-t border-gray-500 mr-4"></span>
           Skills<span className="flex-grow border-t border-gray-500 ml-4"></span>

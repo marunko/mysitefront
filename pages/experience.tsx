@@ -52,9 +52,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const ExperienceTable: React.FC<ExperienceTableProps> = ({ experiences }) => {
   return (
-    <div className="min-h-screen secondcolor">
-      <div className="container mx-auto p-4 min-h-2/4">
-        <h1 className="text-xl font-bold mb-4">Experience Table</h1>
+    <div className="secondcolor min-h-screen p-2">
+      <div className="frontcolor mx-auto shadow-lg rounded-lg p-6">
+        <h1 className="text-xl font-bold mb-4">Experience</h1>
         <table className="table-auto border-collapse border border-gray-400 w-full">
           <thead>
             <tr>
@@ -62,22 +62,32 @@ const ExperienceTable: React.FC<ExperienceTableProps> = ({ experiences }) => {
               <th className="border border-gray-400 px-4 py-2">Company</th>
               <th className="border border-gray-400 px-4 py-2">Start Date</th>
               <th className="border border-gray-400 px-4 py-2">End Date</th>
-              <th className="border border-gray-400 px-4 py-2">Job Roles</th>
+              {/* Hide Job Roles on small screens */}
+              <th className="border border-gray-400 px-4 py-2 hidden md:table-cell">Job Roles</th>
             </tr>
           </thead>
           <tbody>
             {experiences.map((experience, index) => (
               <tr key={index} className="border-t">
-                <td className="border border-gray-400 px-4 py-2">{experience.position}
-                  <span className="flex justify-end"> 
-                    {experience.reference && (<a href={experience.reference} className="italic underline text-blue-600" target="_blank" rel="noopener noreferrer">
-          Reference
-        </a>)}
-                  </span></td>
+                <td className="border border-gray-400 px-4 py-2">
+                  {experience.position}
+                  <span className="flex justify-end">
+                    {experience.reference && (
+                      <a href={experience.reference} className="italic underline text-blue-600" target="_blank" rel="noopener noreferrer">
+                        Reference
+                      </a>
+                    )}
+                  </span>
+                </td>
                 <td className="border border-gray-400 px-4 py-2">{experience.company}</td>
                 <td className="border border-gray-400 px-4 py-2">{experience.start_date}</td>
-                <td className="border border-gray-400 px-4 py-2">{!experience.end_date ? (<span className="italic">Present</span>) :experience.end_date}</td>
                 <td className="border border-gray-400 px-4 py-2">
+                  {!experience.end_date ? (
+                    <span className="italic">Present</span>
+                  ) : experience.end_date}
+                </td>
+                {/* Hide Job Roles on small screens */}
+                <td className="border border-gray-400 px-4 py-2 hidden md:table-cell">
                   <ul className="list-disc ml-5">
                     {experience.job_roles.map((role, roleIndex) => (
                       <li key={roleIndex}>{role.roles}</li>

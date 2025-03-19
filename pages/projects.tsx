@@ -1,14 +1,10 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 import Cookies from 'cookies';
-
+import { motion } from "framer-motion"; // Animation library
+import Link from "next/link";
 // Define TypeScript types for the API response
-interface Project {
-  title: string;
-  description: string;
-  image_path: string;
-  link: string;
-}
+ 
 
 interface ProjectPageProps {
   projects: Project[];
@@ -26,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
  
   });
-
+ 
   if (!res1.ok) {
     return {
       notFound: true,
@@ -39,43 +35,56 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const processedData: Project[] = data.map((item) => ({
     title: item.title,
     description: item.description,
+    summary: item.summary,
     image_path: item.image_path,
     link: item.link,
   }));
-
+ 
   return {
     props: {
-        description: processedData,
+      projects: processedData,
     },
   };
 };
 
-const ProjectPage: React.FC<ProjectPageProps> = ({ projects }) => {
+const ProjectPage: React.FC<ProjectPageProps> = ({ projects }:ProjectPageProps) => {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-xl font-bold mb-6">Project</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="container secondcolor mx-auto p-4 flex flex-col ">
+      <h1 className="text-xl font-bold mb-6">Projects</h1>
+ 
+      <div className="flex flex-col gap-2 items-center">
         {projects.map((proj, index) => (
-          <a
+          <motion.div
             key={index}
-            href={`/projects/${encodeURIComponent(proj.title)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative rounded-lg overflow-hidden shadow-lg group hover:scale-105 transition-transform duration-300"
-            style={{
-              backgroundImage: `url(${proj.image_path})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "300px",
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="max-w-1xl frontcolor h-2/3 shadow-md rounded-lg overflow-hidden flex"
+            style={{ maxHeight: "25vh" }}
           >
-            <div className="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300 flex flex-col justify-center items-center p-4 text-center text-white">
-              <h2 className="text-lg font-semibold mb-2">{proj.title}</h2>
-              <p className="text-sm">{proj.description}</p>
+            {/* Left: Image */}
+            
+            <div className="w-1/3">
+            <Link key={index} href={`/projects/${encodeURIComponent(proj.title)}`}> 
+              <img
+                src={proj.image_path}
+                alt={proj.title}
+                className="w-full h-full object-cover"
+                style={{ maxHeight: "25vh" }}
+              /></Link>
             </div>
-          </a>
+
+            {/* Right: Title and Summary */}
+            <div className="w-2/3 p-4 flex flex-col justify-center">
+            <Link key={index} href={`/projects/${encodeURIComponent(proj.title)}`}>
+              <h2 className="text-lg font-semibold">{proj.title}</h2>  </Link>
+              <p className="text-sm text-gray-600">{proj.summary}</p>
+            </div>
+           
+          </motion.div>
         ))}
       </div>
+  
     </div>
   );
 };

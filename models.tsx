@@ -5,6 +5,9 @@ interface AboutMe{
     text: string;
     summary: string;
 }
+interface AboutMeProps {
+  aboutMe: AboutMe;
+}
 interface JobRole {
     roles: string;
   }

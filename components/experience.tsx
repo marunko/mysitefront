@@ -6,7 +6,7 @@ interface ExperienceProps {
 
 export default function Experience({ experiences }: ExperienceProps) {
   return (
-    <section className="p-8 secondcolor">
+    <section className="p-8 dark:bg-gradient-to-b from-[#1a1a2e] to-[#161624]">
       <h3 className="text-3xl font-semibold flex items-center ">
           <span className="flex-grow border-t border-gray-500 mr-4"></span>
           Experience<span className="flex-grow border-t border-gray-500 ml-4"></span>

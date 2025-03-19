@@ -1,7 +1,7 @@
 import React from "react";
 import { GetServerSideProps } from "next";
-import Cookies from "cookies";
-
+ 
+import { motion } from "framer-motion";
 // Define TypeScript types for the API response
 interface SkillTag {
   text: string;
@@ -55,13 +55,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const SkillsPage: React.FC<SkillsPageProps> = ({ skills }) => {
   return (
-    <div className="min-h-screen secondcolor"> 
-      <div className="container mx-auto p-4 ">
+    <div className="min-h-screen secondcolor">
+      <div className="container mx-auto p-4">
         <h1 className="text-xl font-bold mb-4">Skills</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {skills.map((skill, index) => (
-            <div key={index}
-              className="border rounded-lg p-4 shadow-lg frontcolor">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="border rounded-lg p-4 shadow-lg frontcolor"
+            >
               <h2 className="text-lg font-semibold mb-2">{skill.title}</h2>
               <ul className="list-disc list-inside">
                 {skill.skill_tags.length > 0 ? (
@@ -75,7 +81,7 @@ const SkillsPage: React.FC<SkillsPageProps> = ({ skills }) => {
                   <li className="text-gray-500 italic">No tags available</li>
                 )}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
